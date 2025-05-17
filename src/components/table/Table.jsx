@@ -1,12 +1,12 @@
 const Table = ({ columns = [], data = [] ,title }) => {
   return (
     <>
-      <div class="flex flex-col md:flex-row gap-8">
-        <div class="flex-1 border border-blue-100 rounded-xl p-4 overflow-x-auto">
-          <h3 class="text-lg font-semibold text-blue-700 mb-4">
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1 border border-blue-100 rounded-xl p-4 overflow-x-auto">
+          <h3 className="text-lg font-semibold text-blue-700 mb-4">
             {title}
           </h3>
-          <table class="min-w-full bg-white text-sm">
+          <table className="min-w-full bg-white text-sm">
             <thead className="bg-blue-100 text-blue-800 text-left">
               <tr>
                 {columns && columns.length > 0 ? (

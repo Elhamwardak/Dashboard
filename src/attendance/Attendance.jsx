@@ -1,41 +1,33 @@
+import { useState, useEffect } from "react";
+import AttendanceDetails from "./AttendanceDetails";
 import Icon from "../components/icons/Icons";
 import PieChart from "../components/pichart/PieChart";
-import { useState, useEffect } from "react";
+import useSWR from "swr";
 
-const Attendance = ({ onBack }) => {
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+const Attendance = ({ onBack}) => {
+  const { data, error } = useSWR("/db.json", fetcher);
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
+  
+  const departments = data?.departments || [];
+  const users = data?.users || [];
 
-  const departments = [
-    { id: "d273", name: "H4" },
-    { id: "c2fb", name: "It" },
-    { id: "29e1", name: "Software Development" },
-  ];
-
-  const users = [
-    {
-      id: "1",
-      fullname: "Ali Khan",
-      departmentId: "Software User",
-    },
-    {
-      id: "26fe",
-      fullname: "IT user", 
-      departmentId: "c2fb",
-    },
-    {
-      id: "326b",
-      fullname: "h4 user",
-      departmentId: "d273",
-    },
-  ];
+   
 
   useEffect(() => {
+    if (!data) return;
     const result = users.filter((user) =>
       selectedDepartments.includes(user.departmentId)
     );
     setFilteredUsers(result);
-  }, [selectedDepartments]);
+  }, [selectedDepartments, users, data]);
+
+  if (showDetails) {
+    return <AttendanceDetails onback={() => setShowDetails(false)}/>
+  }
 
   const handleDepartmentChange = (e) => {
     const { id, checked } = e.target;
@@ -43,6 +35,18 @@ const Attendance = ({ onBack }) => {
       checked ? [...prev, id] : prev.filter((deptId) => deptId !== id)
     );
   };
+
+  if (error)
+    return (
+      <div className="p-10 text-red-600 font-semibold">
+        Failed to load data.
+      </div>
+    );
+
+  if (!data)
+    return (
+      <div className="p-10 text-blue-600 font-semibold">Loading data...</div>
+    );
 
   return (
     <>
@@ -85,41 +89,46 @@ const Attendance = ({ onBack }) => {
             </div>
           </div>
 
-          <div class="flex-1 p-6 bg-white rounded-2xl shadow-md">
-            <h2 class="text-2xl font-semibold text-blue-800 mb-6">
+          <div className="flex-1 p-6 bg-white rounded-2xl shadow-md">
+            <h2 className="text-2xl font-semibold text-blue-800 mb-6">
               Department Attendance
             </h2>
 
-            <div class="flex flex-col md:flex-row gap-8">
-              <div class="flex-1 border border-blue-100 rounded-xl p-4 overflow-x-auto">
-                <h3 class="text-lg font-semibold text-blue-700 mb-4">
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex-1 border border-blue-100 rounded-xl p-4 overflow-x-auto">
+                <h3 className="text-lg font-semibold text-blue-700 mb-4">
                   Users Attendance
                 </h3>
-                <table class="min-w-full bg-white text-sm">
-                  <thead class="bg-blue-100 text-blue-800 text-left">
+                <table className="min-w-full bg-white text-sm">
+                  <thead className="bg-blue-100 text-blue-800 text-left">
                     <tr>
-                      <th class="py-3 px-4">Name</th>
-                      <th class="py-3 px-4 text-center">Present</th>
-                      <th class="py-3 px-4 text-center">Absent</th>
-                      <th class="py-3 px-4 text-center">Late</th>
+                      <th className="py-3 px-4">Name</th>
+                      <th className="py-3 px-4">Username</th>
+                      <th className="py-3 px-4">Email</th>
+                      <th className="py-3 px-4">Phone</th>
+                      <th className="py-3 px-4">Action</th>
                     </tr>
                   </thead>
+                  <tbody>
                   {filteredUsers.map((user) => (
                     <tr key={user.id} className="hover:bg-blue-50 transition">
-                      <td className="py-2 px-4 font-medium text-gray-700">
+                      <td className="py-2 px-4  text-gray-700">
                         {user.fullname}
                       </td>
-                      <td className="py-2 px-4 text-center text-green-600 font-semibold">
-                        20
+                      <td className="py-2 px-4 text-gray-700">
+                        {user.username}
                       </td>
-                      <td className="py-2 px-4 text-center text-red-500 font-semibold">
-                        5
-                      </td>
-                      <td className="py-2 px-4 text-center text-yellow-500 font-semibold">
-                        2
+                      <td className="py-2 px-4 text-gray-700">{user.email}</td>
+                      <td className="py-2 px-4 text-gray-700">{user.phone}</td>
+                      <td className="py-2 px-4">
+                        <div className="flex justify-center items-center text-white bg-blue-300 w-10 h-10 rounded-full hover:text-black"  onClick={() => {setShowDetails(true);}}>
+                          <Icon icon="rightarrow"/>
+                        </div>
                       </td>
                     </tr>
                   ))}
+
+                  </tbody>
                 </table>
               </div>
             </div>
