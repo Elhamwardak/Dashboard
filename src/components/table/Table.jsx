@@ -1,57 +1,58 @@
-
-const Table = ({users}) => {
+const Table = ({ columns = [], data = [] ,title }) => {
   return (
     <>
-      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidde">
-        <thead className="bg-blue-200">
-          <tr>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-              Full Name
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-              Email
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-              username
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-              Phone
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-              Role
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200">
-          {
-            users && users.length > 0 ? (
-              users.map((user, index) => (
-                <tr key={index }>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {user.fullname}
-                 </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {user.email}
-                 </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {user.username}
-                 </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {user.phone}
-                 </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {user.role}
-                 </td>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="flex-1 border border-blue-100 rounded-xl p-4 overflow-x-auto">
+          <h3 class="text-lg font-semibold text-blue-700 mb-4">
+            {title}
+          </h3>
+          <table class="min-w-full bg-white text-sm">
+            <thead className="bg-blue-100 text-blue-800 text-left">
+              <tr>
+                {columns && columns.length > 0 ? (
+                  columns.map((column, index) => (
+                    <th
+                      key={index}
+                      className="px-6 py-3 text-left text-sm font-bold  tracking-wider"
+                    >
+                      {column.header}
+                    </th>
+                  ))
+                ) : (
+                  <th className="px-6 py-3 text-left text-sm font-bold  tracking-wider">
+                    No columns defined
+                  </th>
+                )}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {data && data.length > 0 ? (
+                data.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {columns.map((column, colIndex) => (
+                      <td
+                        key={colIndex}
+                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                      >
+                        {row[column.accessor]}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={columns.length}
+                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center"
+                  >
+                    No data found.
+                  </td>
                 </tr>
-              ))
-            ):(
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    No users found.
-              </td>
-            )
-          }
-        </tbody>
-      </table>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 };

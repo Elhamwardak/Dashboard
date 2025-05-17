@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../components/button/Button";
 import Search from "../components/searchbar/Search";
+import { useSearch } from "../context/SearchContext";
 import Table from "../components/table/Table";
 import Popup from "../components/popup/popup";
 import Input from "../components/input/Input";
@@ -10,7 +11,6 @@ import useSWR from "swr";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const User = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
   const [newUser, setNewUser] = useState({
@@ -31,17 +31,31 @@ const User = () => {
     mutate,
   } = useSWR("http://localhost:3001/users", fetcher);
 
-  const filteredUsers = users?.filter(
-    (user) =>
-      user.fullname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.phone.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const { searchQuery } = useSearch();
+
+  const filteredUsers = users
+    ? [...users]
+    .reverse()
+    .filter(
+        (user) =>
+          user.fullname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.phone.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.role.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    setNewUser({ ...newUser, [name]: value });
+
+    if (name === "phone") {
+      const digitsOnly = value.replace(/\D/g, "")
+      if (digitsOnly.length > 10) return;
+      setNewUser({ ...newUser, [name]: digitsOnly });
+    } else {
+      setNewUser({ ...newUser, [name]: value });
+    }
   };
 
   const addUser = async (user) => {
@@ -89,15 +103,20 @@ const User = () => {
     addUser(newUser);
   };
 
+  const columns = [
+    { header: "Full Name", accessor: "fullname" },
+    { header: "Email", accessor: "email" },
+    { header: "Username", accessor: "username" },
+    { header: "Phone Nummber", accessor: "phone" },
+    { header: "Role", accessor: "role" },
+  ];
+
   return (
     <>
       <div className="space-y-4 p-10">
         <div className="flex justify-between items-center">
           <div className="max-w-md">
-            <Search
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            <Search />
           </div>
           <div>
             <Button title="Add User" onClick={() => setOpenPopup(true)} />
@@ -105,7 +124,11 @@ const User = () => {
         </div>
         {isLoading && <p>Loading...</p>}
         {error && <p className="text-red-500">Failed to load users</p>}
-        <Table users={filteredUsers} />
+        {filteredUsers && filteredUsers.length > 0 ? (
+          <Table columns={columns} data={filteredUsers} title="Users"/>
+        ) : (
+          <p>No users found.</p>
+        )}
       </div>
 
       {openPopup && (
@@ -179,7 +202,7 @@ const User = () => {
                     No Image
                   </div>
                 )}
-                <label className="inline-block cursor-pointer bg-blue-800 hover:bg-blue-700 text-white hover:text-black hover:bg-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
+                <label className="inline-block cursor-pointer bg-blue-800  text-white hover:text-black hover:bg-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
                   Upload image
                   <input type="file" accept="image/*" className="hidden" />
                 </label>

@@ -12,6 +12,8 @@ import {
   faBars,
   faArrowRightFromBracket,
   faUser,
+  faArrowLeft,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
 
 const Icon = ({ icon, onClick }) => {
@@ -28,7 +30,9 @@ const Icon = ({ icon, onClick }) => {
     FaBars: faBars,
     logout:faArrowRightFromBracket,
     user:faUser,
-    department:faStore
+    department:faStore,
+    back:faArrowLeft,
+    attendance:faUsers
   };
 
   return (

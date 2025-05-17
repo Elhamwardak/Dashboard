@@ -9,6 +9,7 @@ import Deparment from './department/Department'
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import { SearchProvider } from "./context/SearchContext";
 import "./App.css";
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
   };
 
   return (
-    <>
+    <SearchProvider>
       <div className="flex h-screen bg-gray-100">
         <motion.aside
           initial={{ width: 70 }}
@@ -109,7 +110,7 @@ function App() {
           {renderContent()}
         </main>
       </div>
-    </>
+    </SearchProvider>
   );
 }
 

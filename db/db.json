@@ -8,7 +8,8 @@
       "phone": "0700123456",
       "password": "123456",
       "role": "Admin",
-      "profilePic": "data:image/jpeg;base64,..."
+      "profilePic": "data:image/jpeg;base64,...",
+      "departmentId":"d273"
     },
     {
       "id": "26fe",
@@ -17,7 +18,8 @@
       "username": "sdsdf",
       "phone": "0702018765",
       "password": "asdasd",
-      "role": "Superadmin"
+      "role": "Superadmin",
+      "departmentId":"d273"
     },
     {
       "id": "326b",
@@ -26,214 +28,31 @@
       "username": "sadadas",
       "phone": "0702018765",
       "password": "dadad",
-      "role": "User"
+      "role": "User",
+      "departmentId":"d273"
+    }
+  ],
+  "departments": [
+    {
+      "id": "d273",
+      "name": "H4",
+      "details": "manage all things",
+      "numberOfEmployees": "4",
+      "salaryCount": "10000"
     },
     {
-      "id": "7528",
-      "fullname": "asdd",
-      "email": "asdad@gmail.com",
-      "username": "asdad",
-      "phone": "asdad",
-      "password": "asdasd",
-      "role": "Superadmin"
+      "id": "c2fb",
+      "name": "It",
+      "details": "controlling internet ",
+      "numberOfEmployees": "2",
+      "salaryCount": "5000"
     },
     {
-      "id": "4790",
-      "fullname": "Elham ",
-      "email": "el@gmail.com",
-      "username": "ksdf",
-      "phone": "sklfj",
-      "password": "klsdjf",
-      "role": "User"
-    },
-    {
-      "id": "434c",
-      "fullname": "khghg",
-      "email": "jhsdfk@gmail.com",
-      "username": "asdfsdaf",
-      "phone": "dsafsdf",
-      "password": "sdafsafd",
-      "role": "Superadmin"
-    },
-    {
-      "id": "b902",
-      "fullname": "khkjh",
-      "email": "jhgjh@gmaillcom",
-      "username": "kjhkjh",
-      "phone": "hgvhgf",
-      "password": "tdgfd",
-      "role": "Superadmin"
-    },
-    {
-      "id": "1d8e",
-      "fullname": "hkjewr",
-      "email": "wer@gmail.com",
-      "username": "sdfd",
-      "phone": "sdfsdf",
-      "password": "sdfs",
-      "role": "Superadmin"
-    },
-    {
-      "id": "d16c",
-      "fullname": "ggftf",
-      "email": "ffd@gmail.com",
-      "username": "kljfs",
-      "phone": "kdjsfj",
-      "password": "kklsdjf",
-      "role": "User"
-    },
-    {
-      "id": "dcb9",
-      "fullname": "dsfs",
-      "email": "lkjdf@gmail.com",
-      "username": "klsjfl",
-      "phone": "lkjsdlkf",
-      "password": "kljlsdkfj",
-      "role": "User"
-    },
-    {
-      "id": "1423",
-      "fullname": "sdfsf",
-      "email": "sdakljf@gmaill.com",
-      "username": "sfsdf",
-      "phone": "sdf",
-      "password": "sdfsf",
-      "role": "User"
-    },
-    {
-      "id": "923d",
-      "fullname": "ijhkjh",
-      "email": "kjhkjh@gmai.com",
-      "username": "lksjf",
-      "phone": "kljsdflk",
-      "password": "lkjsdflk",
-      "role": "Superadmin"
-    },
-    {
-      "id": "1bc0",
-      "fullname": "elham ",
-      "email": "elh@gmail.com",
-      "username": "klsjdfl",
-      "phone": "lkjsdlkfj",
-      "password": "lkjsdlfk",
-      "role": "Superadmin"
-    },
-    {
-      "id": "774a",
-      "fullname": "sdf",
-      "email": "sfs@gmail.com",
-      "username": "sdf",
-      "phone": "sdf",
-      "password": "sdf",
-      "role": "User"
-    },
-    {
-      "id": "b747",
-      "fullname": "sdf",
-      "email": "elham.wardak.ew@gmail.com",
-      "username": "sdf",
-      "phone": "sdf",
-      "password": "sdf",
-      "role": "Superadmin"
-    },
-    {
-      "id": "f925",
-      "fullname": "dsfd",
-      "email": "admin@gamil.com",
-      "username": "sdasd",
-      "phone": "adad",
-      "password": "adads",
-      "role": "Superadmin"
-    },
-    {
-      "id": "e3b9",
-      "fullname": "Elham Wardak",
-      "email": "elham.wardak.ew@gmail.com",
-      "username": "kjjk",
-      "phone": "0702018765",
-      "password": "kjkj",
-      "role": "User"
-    },
-    {
-      "id": "7f89",
-      "fullname": "lkjlk",
-      "email": "lkjdf@gmail.com",
-      "username": "kj",
-      "phone": "lkj",
-      "password": "lkjlkkjl",
-      "role": "User"
-    },
-    {
-      "id": "51d7",
-      "fullname": "dfs",
-      "email": "shaheer@gmail.com",
-      "username": "sfdff",
-      "phone": "fsdff",
-      "password": "sdff",
-      "role": "Superadmin"
-    },
-    {
-      "id": "19a3",
-      "fullname": "sdasd",
-      "email": "asdad@gmail.com",
-      "username": "j",
-      "phone": "kjh",
-      "password": "kjhkj",
-      "role": "User"
-    },
-    {
-      "id": "09f5",
-      "fullname": "dsfs",
-      "email": "sdf@gmail.com",
-      "username": "sdf",
-      "phone": "sdf",
-      "password": "sdf",
-      "role": "User"
-    },
-    {
-      "id": "25ba",
-      "fullname": "awahsjhkj",
-      "email": "asasssas@adaads.casc",
-      "username": "asasas",
-      "phone": "07000",
-      "password": "asjksaassas",
-      "role": "User"
-    },
-    {
-      "id": "297f",
-      "fullname": "Elham Wardak",
-      "email": "elham.wardak.ew@gmail.com",
-      "username": "aasaas",
-      "phone": "0702018765",
-      "password": "assssaas",
-      "role": "User"
-    },
-    {
-      "id": "17e0",
-      "fullname": "",
-      "email": "",
-      "username": "",
-      "phone": "",
-      "password": "",
-      "role": ""
-    },
-    {
-      "id": "81c1",
-      "fullname": "Elham Wardak",
-      "email": "elham.wardak.ew@gmail.com",
-      "username": "elham",
-      "phone": "0702018765",
-      "password": "elham",
-      "role": "User"
-    },
-    {
-      "id": "faca",
-      "fullname": "Elham Wardak",
-      "email": "elham.wardak.ew@gmail.com",
-      "username": "elham",
-      "phone": "0702018765",
-      "password": "sdfaf",
-      "role": "Superadmin"
+      "id": "29e1",
+      "name": "Software Development",
+      "details": "software users",
+      "numberOfEmployees": "8",
+      "salaryCount": "20000"
     }
   ]
 }
